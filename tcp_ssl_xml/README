@@ -13,6 +13,6 @@ So it should be like arm-linux-gnueabi-gcc -o tcp_ssl_xml_server tcp_ssl_xml_ser
 
 Type ./tcp_ssl_xml_server 8080 5 cacert.pem privkey.pem
 	./tcp_ssl_xml_client 127.0.0.1 8080 25 30
-to run them on PC, and change 127.0.0.1 to the ip address of server. Here, 25 and 30 are the Low and High limits of temperature correspondingly.
+to run them on PC, and change 127.0.0.1 to the ip address of server. Here, 5 is the connection maximum of the server. 25 and 30 are the Low and High limits of temperature correspondingly.
 
 File "data" is only for test on PC.
