@@ -1,0 +1,5 @@
+./mdp_broker on Laptop
+./test_workerARM on BBB1, only collect sensor data
+./test_clientARM 23 24 on BBB2, also control
+
+
