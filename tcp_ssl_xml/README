@@ -1,10 +1,12 @@
 This folder is about TCP communication using OpenSSL and Mini-XML.
+
 -------------------------------------------------------------------------
 If the certificate and private key are out of date, please use the following command to generate new ones. 
 	openssl genrsa -out privkey.pem 2048
 	openssl req -new -x509 -key privkey.pem -out cacert.pem -days 1095
 
 At the same time, of course, you should have installed OpenSSL and Mini-XML for PC and ARM to execute and run these codes.
+
 ------------------------------------------------------------------------
 Then, to compile them, please open the terminal, and type 
 	gcc -o tcp_ssl_xml_client tcp_ssl_xml_client.c -lssl -lcrypto -lmxml -lpthread
