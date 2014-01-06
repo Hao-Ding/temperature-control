@@ -1,0 +1,41 @@
+Here is about the service-oriented implementation: majordomo.
+
+-------------------------------------------------------------------------
+Firstly, some prerequisites are necessary: libzmq, libczmq, libmxml.
+
+Attention: when the installation fails, please delete the whole folder and re-decompress or re-copy a new one to try again. And when trying to install libs for ARM, decompress or copy new folders besides old ones.
+
+libzmq can be found here https://github.com/zeromq/libzmq. we can type
+	$ git clone https://github.com/zeromq/libzmq 
+to git a copy and type
+	$ libtoolize --force (this step is unnecesary, if installation starts from configure fails, please add it)
+	$ ./configure 
+	$ make
+	# make install
+
+libczmq is here https://github.com/zeromq/czmq
+	# git clone https://github.com/zeromq/czmq
+Then it is the same with the first one.
+
+libmxml is here http://www.msweet.org/downloads.php?L+Z3
+Decompress the package and install it.
+
+Besides, if libs for ARM are in need, please mkdir new folders and modify ./configure to ./configure --prefix=<the path you want to install> --host=arm-linux-gnueabi<or other cross-complier name>. For example, to install czmq for ARM, ./configure --prefix=/home/dhlinux/czmq-lib-arm --host=arm-linux-gnueabi
+
+-------------------------------------------------------------------------Then, majordomo can be gotten from: git clone https://github.com/zeromq/majordomo
+
+No need to install it. And in ./libmdp/src, some examples can be found.
+
+Compile mdp_broker.c, test_client.c, test_worker.c by gcc -o mdp_broker mdp_broker.c -lzmq -lczmq, for instance. Then open three terminals, type ./mdp_broker, ./test_client -v, ./test_server -v to see the results. It is a hello-world example.
+
+Here, the files in ./include are almos the same with the origins, except that the path of czmq.h is modified as the absolute path.
+
+Inside of ./src are the final test programs, modified from the source. mdp_broker will work on PC as the broker, while test_workerARM and test_clientARM will work on Beaglebone Black. 
+
+The worker registers on the broker with its special serviceand provides the service and the client connects to the broker to ask for one service. The worker and the client have no idea of each other. Both of them can only see the broker. 
+
+When executing the test, the worker and the client are inside of two BBBs. Both communicate with the broker on the PC. The worker provides the temperature data and the client receives the data and merges it with its own temperature data to control the lamp and fan.
+
+One instance to cross-compile the worker and the client is shown in the following: arm-linux-gnueabi-gcc -o test_workerARM test_worker.c -L/home/dhlinux/czmq-lib-arm/lib -L/home/dhlinux/mxml-2.7ARM -lzmq -lczmq -lmxml -lpthread
+
+Here, libzmq is installed in the default path for arm, so no need to point out its path.
