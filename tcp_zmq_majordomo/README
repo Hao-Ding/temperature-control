@@ -22,7 +22,8 @@ Decompress the package and install it.
 
 Besides, if libs for ARM are in need, please mkdir new folders and modify ./configure to ./configure --prefix=<the path you want to install> --host=arm-linux-gnueabi<or other cross-complier name>. For example, to install czmq for ARM, ./configure --prefix=/home/dhlinux/czmq-lib-arm --host=arm-linux-gnueabi
 
--------------------------------------------------------------------------Then, majordomo can be gotten from: git clone https://github.com/zeromq/majordomo
+-------------------------------------------------------------------------
+Then, majordomo can be gotten from: git clone https://github.com/zeromq/majordomo
 
 No need to install it. And in ./libmdp/src, some examples can be found.
 
@@ -34,7 +35,7 @@ Inside of ./src are the final test programs, modified from the source. mdp_broke
 
 The worker registers on the broker with its special serviceand provides the service and the client connects to the broker to ask for one service. The worker and the client have no idea of each other. Both of them can only see the broker. 
 
-When executing the test, the worker and the client are inside of two BBBs. Both communicate with the broker on the PC. The worker provides the temperature data and the client receives the data and merges it with its own temperature data to control the lamp and fan.
+When executing the test, the worker and the client are inside of two BBBs. Both communicate with the broker on the PC. The worker provides the temperature data and the client receives the data and merges it with its own temperature data to control the lamp and fan. Remember three arguments are needed for client: ./test_clientARM 23 24
 
 One instance to cross-compile the worker and the client is shown in the following: arm-linux-gnueabi-gcc -o test_workerARM test_worker.c -L/home/dhlinux/czmq-lib-arm/lib -L/home/dhlinux/mxml-2.7ARM -lzmq -lczmq -lmxml -lpthread
 
