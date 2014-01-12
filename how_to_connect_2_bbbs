@@ -1,0 +1,23 @@
+How to connect two beaglebone in one computer?
+
+Only need one FTDI cable.
+1. Connect BBB1 with the computer using usb cable and FTDI cable. And type 
+$ sudo screen /dev/ttyUSB0 115200 on laptop to enter BBB through FTDI cable.
+On BBB1:
+2. Change its ip address by: # ifconfig usb0 192.168.9.2
+3. # route add default gw 192.168.9.1
+On Laptop:
+4. Typing ifconfig to see the inet name to connect with BBB1. Here it is eth1, and change it to 192.168.9.1: $ ifconfig eth1 192.168.9.1
+5. Now we can connect BBB1 and laptop, by ping 192.168.9.1(BBB1) and ping 192.168.9.2(Laptop)
+
+6. Plug BBB2 to laptop, and wait for connection built. If connection fails, unplug it and try again. 
+
+On Laptop:
+7. Go to super user mode, and open ~/.ssh/known_hosts, commit or delete the content and save it.
+8. # echo 1 > /proc/sys/net/ipv4/ip_forward
+8. Type # ssh root@192.168.7.2
+On BBB2:
+9. Add default gateway: route add default gw 192.168.7.1
+10. ping 192.168.9.2
+On BBB1:
+11. ping 192.168.7.2
